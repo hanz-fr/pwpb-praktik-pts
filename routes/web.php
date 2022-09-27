@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GolonganController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
@@ -24,6 +25,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::resource('pegawai', PegawaiController::class);
+Route::resource('pegawai', PegawaiController::class)->middleware('auth');
+Route::resource('golongan', GolonganController::class)->middleware('auth');
+
+Route::get('/kepegawaian', [PegawaiController::class, 'kepegawaian'])->middleware('auth');
 
 Route::get('/', [DashboardController::class, 'index'])->name('home')->middleware('auth');

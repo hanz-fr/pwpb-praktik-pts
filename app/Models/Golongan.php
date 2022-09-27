@@ -9,6 +9,8 @@ class Golongan extends Model
 {
     use HasFactory;
 
+    protected $table = 'golongan';
+
     protected $fillable = [
         'id',
         'nama',

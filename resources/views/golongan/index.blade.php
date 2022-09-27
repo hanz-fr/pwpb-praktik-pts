@@ -23,12 +23,12 @@
 
 
     <div class="block">
-        <h1 class="flex justify-center font-bold text-white text-3xl mt-16">Tampil Data Pegawai</h1>
+        <h1 class="flex justify-center font-bold text-white text-3xl mt-16 mb-10">Tampil Data Golongan</h1>
         <div class="flex justify-between mt-5">
-            <form action="/pegawai">
+            <form action="/golongan">
                 <label class="relative block">
                     <span class="sr-only">Search</span>
-                    <input class="placeholder:italic placeholder:text-slate-400 block bg-slate-700 w-full border rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm text-slate-300" placeholder="Search pegawai..." type="text" name="search" value="{{ request('search') }}"/>
+                    <input class="placeholder:italic placeholder:text-slate-400 block bg-slate-700 w-full border rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm text-slate-300" placeholder="Search golongan..." type="text" name="search" value="{{ request('search') }}"/>
                     <span class="absolute inset-y-0 right-5 flex items-center pl-2">
                         <button type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -36,32 +36,19 @@
                     </span>
                 </label>
             </form>
-            <a href="/pegawai/create" class="my-auto text-teal-300 hover:text-teal-500 transition-all">+ Tambah data</a>
+            <a href="/golongan/create" class="my-auto text-teal-300 hover:text-teal-500 transition-all">+ Tambah data</a>
         </div>
-
-        <table class="mt-2 text-sm text-left text-gray-500 dark:text-gray-400">
+        <table class="mt-5 text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
             <tr class="text-center">
                 <th scope="col" class="py-3 px-6">
                     No
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    NIP
+                    Kode Golongan
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    Nama
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Jenis Kelamin
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Status
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Gol
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    Agama
+                    Nama Golongan
                 </th>
                 <th scope="col" class="py-3 px-6">
                     Aksi
@@ -69,37 +56,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pegawai as $p)
+            @foreach ($golongan as $g)
             <tr class="border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white counterCell">
+                </th>
                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $p->id }}
+                    {{ $g->id }}
                 </th>
                 <td class="py-4 px-6">
-                    {{ $p->nip }}
-                </td>
-                <td class="py-4 px-6">
-                    {{ $p->nama }}
-                </td>
-                <td class="py-4 px-6">
-                    {{ $p->jenis_kelamin }}
-                </td>
-                <td class="py-4 px-6">
-                    {{ $p->status_nikah }}
-                </td>
-                <td class="py-4 px-6">
-                    {{ $p->golongan_id }}
-                </td>
-                <td class="py-4 px-6">
-                    {{ $p->agama }}
+                    {{ $g->nama_golongan }}
                 </td>
                 <td class="py-4 px-6 flex">
-                    <a href="/pegawai/{{ $p->id }}/edit" class="px-2 font-medium dark:text-orange-300 text-blue-500 hover:underline">Edit</a>
-                    <form action="/pegawai/{{ $p->id }}" method="POST">
+                    <a href="/golongan/{{ $g->id }}/edit" class="px-2 font-medium dark:text-orange-300 text-blue-500 hover:underline">Edit</a>
+                    <form action="/golongan/{{ $g->id }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button onclick="confirmDelete(event)" type="submit" class="px-2 font-medium dark:text-red-500 text-blue-500 hover:underline">Hapus</button>
                     </form>
-                    <a href="/pegawai/{{$p->id}}" class="px-2 font-medium dark:text-blue-600 text-blue-500 hover:underline">Detail</a>
+                    <a href="/golongan/{{$g->id}}" class="px-2 font-medium dark:text-blue-600 text-blue-500 hover:underline">Detail</a>
                 </td>
             </tr>
             @endforeach
@@ -119,8 +93,8 @@
 
 
     function confirmDelete(e) {
- if(confirm('Are you sure you want to delete this pegawai?'))
-   alert('Pegawai deleted');
+ if(confirm('Are you sure you want to delete this golongan?'))
+   alert('Golongan deleted.');
  else {
   e.preventDefault();
  }

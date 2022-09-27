@@ -12,7 +12,6 @@
 
 <body>
     @include('components.sidebar')
-    
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,12 +15,23 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = DB::table('pegawai')->get();
+        $pegawai = Pegawai::latest();
+
+        if(request('search')) {
+            $pegawai->where('nama', 'like', '%' . request('search') . '%')
+            ->orWhere('nik', 'like', '%' . request('search') . '%')
+            ->orWhere('nip', 'like', '%' . request('search') . '%')
+            ->orWhere('jenis_kelamin', 'like', '%' . request('search') . '%')
+            ->orWhere('status_nikah', 'like', '%' . request('search') . '%')
+            ->orWhere('golongan_id', 'like', '%' . request('search') . '%')
+            ->orWhere('agama', 'like', '%' . request('search') . '%');
+        }
+
 
         return view('pegawai.index', [
             'title' => 'Pegawai',
             'active' => 'pegawai',
-            'pegawai' => $pegawai,
+            'pegawai' => $pegawai->get()
         ]);
     }
 
@@ -30,9 +42,12 @@ class PegawaiController extends Controller
      */
     public function create()
     {
+        $golongan = DB::table('golongan')->get();
+
         return view('pegawai.create', [
             'title' => 'Create Pegawai',
             'active' => 'pegawai',
+            'golongan' => $golongan
         ]);
     }
 
@@ -51,7 +66,7 @@ class PegawaiController extends Controller
             'golongan_id' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required|max:100',
-            'tanggal_lahir' => 'required|date',
+            'tanggal_lahir' => 'required',
             'telpon' => 'required|max:12',
             'agama' => 'required|max:15',
             'status_nikah' => 'required',
@@ -71,7 +86,7 @@ class PegawaiController extends Controller
      */
     public function show($id)
     {
-        $pegawai = DB::table('pegawai')->where('id', $id)->get();
+        $pegawai = DB::table('pegawai')->find($id);
 
         return view('pegawai.detail', [
             'title' => 'Pegawai Detail',
@@ -88,7 +103,16 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
+        $pegawai = DB::table('pegawai')->find($id);
 
+        $golongan = DB::table('golongan')->get();
+
+        return view('pegawai.update', [
+            'title' => 'Edit Pegawai',
+            'active' => 'pegawai',
+            'pegawai' => $pegawai,
+            'golongan' => $golongan,
+        ]);
     }
 
     /**
@@ -98,9 +122,33 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pegawai $pegawai)
     {
-        //
+        $rules = [
+            'golongan_id' => 'required',
+            'nama' => 'required|max:100',
+            'jenis_kelamin' => 'required',
+            'tempat_lahir' => 'required|max:100',
+            'tanggal_lahir' => 'required',
+            'telpon' => 'required|max:12',
+            'agama' => 'required|max:15',
+            'status_nikah' => 'required',
+            'alamat' => 'required',
+        ];
+
+        if($request->nik != $pegawai->nik) {
+            $rules['nik'] = 'required|max:12';
+        }
+
+        if($request->nip != $pegawai->nip) {
+            $rules['nip'] = 'required|max:12';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        Pegawai::where('id', $pegawai->id)->update($validatedData);
+
+        return redirect('/pegawai')->with('success', 'Pegawai updated successfully');
     }
 
     /**
@@ -111,6 +159,29 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pegawai::destroy($id);
+
+        return redirect('/pegawai')->with('success', 'Pegawai deleted successfully.');
+    }
+
+
+    public function kepegawaian()
+    {
+        $pegawai = Pegawai::latest();
+
+        if(request('search')) {
+            $pegawai->where('nama', 'like', '%' . request('search') . '%')
+            ->orWhere('nik', 'like', '%' . request('search') . '%')
+            ->orWhere('nip', 'like', '%' . request('search') . '%')
+            ->orWhere('jenis_kelamin', 'like', '%' . request('search') . '%')
+            ->orWhere('golongan_id', 'like', '%' . request('search') . '%');
+        }
+
+
+        return view('kepegawaian.index', [
+            'title' => 'Kepegawaian',
+            'active' => 'kepegawaian',
+            'pegawai' => $pegawai->get()
+        ]);
     }
 }

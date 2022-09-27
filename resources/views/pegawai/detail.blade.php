@@ -2,52 +2,58 @@
 
 
 @section('content')
-<div class="flex-1">
-<table class="table bg-slate-900">
-    <tbody class="text-white">
-    @foreach ($pegawai as $p)
-      <tr>
-        <td>ID</td>
-        <td>{{ $p->id }}</td>
-      </tr>
-      <tr>
-        <td>NIK</td>
-        <td>{{ $p->nik }}</td>
-      </tr>
-      <tr>
-        <td>NIP</td>
-        <td>{{ $p->nip }}</td>
-      </tr>
-      <tr>
-        <td>Nama</td>
-        <td>{{ $p->nama }}</td>
-      </tr>
-      <tr>
-        <td>Jenis Kelamin</td>
-        <td>{{ $p->jenis_kelamin }}</td>
-      </tr>
-      <tr>
-        <td>Tempat Lahir</td>
-        <td>{{ $p->tempat_lahir }}</td>
-      </tr>
-      <tr>
-        <td>Tanggal Lahir</td>
-        <td>{{ $p->tanggal_lahir }}</td>
-      </tr>
-      <tr>
-        <td>Telpon</td>
-        <td>{{ $p->telpon }}</td>
-      </tr>
-      <tr>
-        <td>Agama</td>
-        <td>{{ $p->agama }}</td>
-      </tr>
-      <tr>
-        <td>Alamat</td>
-        <td>{{ $p->alamat }}</td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
-</div>
+    <div class="mx-auto my-5 text-start">
+        <div class="bg-slate-900 shadow-lg rounded-lg p-5">
+            <h1 class="text-white font-bold text-2xl flex justify-center mb-10 bg-slate-800 rounded-lg py-2">Detail Pegawai
+            </h1>
+            <table class="table bg-slate-900 border-separate border-spacing-y-3 border-spacing-x-10">
+                <tbody class="text-white">
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">ID</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->id }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">NIK</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->nik }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">NIP</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->nip }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">Nama</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->nama }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">Jenis Kelamin</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->jenis_kelamin }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">Tempat Lahir</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->tempat_lahir }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">Tanggal Lahir</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->tanggal_lahir }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">Tempat Lahir</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->tempat_lahir }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">Telpon</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->telpon }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">Agama</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->agama }}</td>
+                    </tr>
+                    <tr>
+                        <td class="px-5 font-bold text-slate-300">Alamat</td>
+                        <td class="px-5 text-slate-300">{{ $pegawai->alamat }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection

@@ -35,6 +35,15 @@
                 <span class="ml-2 text-sm tracking-wide truncate">Golongan</span>
             </a>
         </li>
+        <li>
+            <a href="/kepegawaian"
+                class="relative flex flex-row items-center h-11 focus:outline-none {{ $active == 'kepegawaian' ? 'bg-gray-800 text-teal-300' : '' }} hover:bg-blue-800 dark:hover:bg-gray-800 dark:hover:text-teal-300 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+                <span class="inline-flex justify-center items-center ml-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                </span>
+                <span class="ml-2 text-sm tracking-wide truncate">Kepegawaian</span>
+            </a>
+        </li>
         <li class="px-5 hidden md:block">
             <div class="flex flex-row items-center mt-5 h-8">
                 <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Account</div>

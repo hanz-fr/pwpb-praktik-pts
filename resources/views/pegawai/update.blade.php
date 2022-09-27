@@ -3,13 +3,13 @@
 @section('content')
 <div class="mx-auto my-10">
     <div class="block p-6 bg-slate-900 rounded-lg" style="width: 600px">
-    <form action="/pegawai" method="POST">
+    <form action="/pegawai/{{ $pegawai->id }}" method="POST">
       @csrf
-      @method('POST')
+      @method('put')
       <div class="form-group mb-6 ">
-        <h1 class="flex justify-center mb-5 text-white font-bold">Create Pegawai</h1>
+        <h1 class="flex justify-center mb-5 text-white font-bold">Edit Pegawai</h1>
         <label for="nip" class="form-label inline-block mb-2 text-gray-500">NIP</label>
-        <input value="{{ old('nip') }}" name="nip" type="text" class="form-control
+        <input value="{{ old('nip', $pegawai->nip) }}" name="nip" type="text" class="form-control
           block
           w-full
           px-3
@@ -35,6 +35,7 @@
       <div class="form-group mb-6">
         <label for="golongan_id" class="form-label inline-block mb-2 text-gray-500">ID Golongan</label>
         <select class="input-data" name="golongan_id" id="golongan_id">
+          <option selected value="{{ $pegawai->golongan_id }}">{{ $pegawai->golongan_id }}</option>
           @foreach ($golongan as $g)
           <option value="{{ $g->id }}">{{ $g->id }}</option>
           @endforeach
@@ -46,7 +47,7 @@
 
       <div class="form-group mb-6">
         <label for="nik" class="form-label inline-block mb-2 text-gray-500">NIK</label>
-        <input value="{{ old('nik') }}" name="nik" type="text" class="form-control block
+        <input value="{{ old('nik', $pegawai->nik) }}" name="nik" type="text" class="form-control block
           w-full
           px-3
           py-1.5
@@ -70,7 +71,7 @@
       </div>
       <div class="form-group mb-6">
         <label for="nama" class="form-label inline-block mb-2 text-gray-500">Nama</label>
-        <input value="{{ old('nama') }}" name="nama" type="text" class="form-control block
+        <input value="{{ old('nama', $pegawai->nama) }}" name="nama" type="text" class="form-control block
           w-full
           px-3
           py-1.5
@@ -106,7 +107,7 @@
       
       <div class="form-group mb-6">
         <label for="tempat_lahir" class="form-label inline-block mb-2 text-gray-500">Tempat Lahir</label>
-        <input value="{{ old('tempat_lahir') }}" name="tempat_lahir" type="text" class="form-control block
+        <input value="{{ old('tempat_lahir', $pegawai->tempat_lahir) }}" name="tempat_lahir" type="text" class="form-control block
           w-full
           px-3
           py-1.5
@@ -131,7 +132,7 @@
 
       <div class="form-group mb-6">
         <label for="tanggal_lahir" class="form-label inline-block mb-2 text-gray-500">Tanggal Lahir</label>
-        <input value="{{ old('tanggal_lahir') }}" name="tanggal_lahir" type="date" class="form-control block
+        <input value="{{ old('tanggal_lahir', $pegawai->tanggal_lahir) }}" name="tanggal_lahir" type="date" class="form-control block
           w-full
           px-3
           py-1.5
@@ -156,7 +157,7 @@
 
       <div class="form-group mb-6">
         <label for="telpon" class="form-label inline-block mb-2 text-gray-500">Telepon</label>
-        <input value="{{ old('telpon') }}" name="telpon" type="text" class="form-control block
+        <input value="{{ old('telpon', $pegawai->telpon) }}" name="telpon" type="text" class="form-control block
           w-full
           px-3
           py-1.5
@@ -181,7 +182,7 @@
 
       <div class="form-group mb-6">
         <label for="agama" class="form-label inline-block mb-2 text-gray-500">Agama</label>
-        <input value="{{ old('agama') }}" name="agama" type="text" class="form-control block
+        <input value="{{ old('agama', $pegawai->agama) }}" name="agama" type="text" class="form-control block
           w-full
           px-3
           py-1.5
@@ -214,7 +215,7 @@
 
       <div class="form-group mb-6">
         <label for="alamat" class="form-label inline-block mb-2 text-gray-500">Alamat</label>
-        <input value="{{ old('alamat') }}" name="alamat" type="text" class="form-control block
+        <input value="{{ old('alamat', $pegawai->alamat) }}" name="alamat" type="text" class="form-control block
           w-full
           px-3
           py-1.5
@@ -232,7 +233,7 @@
           m-0
            focus:border-blue-600 focus:outline-none" id="alamat"
           placeholder=". . .">
-          @error('agama')
+          @error('alamat')
           <small class="text-red-400">{{ $message }}</small>
           @enderror
       </div>
@@ -257,5 +258,7 @@
     </form>
   </div>
 </div>
+
+
 
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
     <section class="h-screen">
         <div class="container mx-auto px-6 py-12 h-full">
-            <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+            <div class="flex justify-center items-center flex-wrap h-full g-6 text-slate-800">
                 <div class="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="w-full"
                         alt="Phone image" />
@@ -18,7 +18,7 @@
                         <!-- input nama -->
                         <div class="mb-6">
                             <input value="{{ old('name') }}" required type="text" name="name"
-                                class="@error('name') border-red-400 @enderror form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                class="@error('name') border-red-400 @enderror form-control block w-full px-4 py-2 text-xl font-normal text-slate-800 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:border-blue-600 focus:outline-none"
                                 placeholder="Name" />
                             @error('name')
                                 <small class="text-red-400">{{ $message }}</small>
@@ -28,7 +28,7 @@
                         <!-- input username -->
                         <div class="mb-6">
                             <input value="{{ old('username') }}" required type="text" name="username"
-                                class="@error('username') border-red-400 @enderror form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                class="@error('username') border-red-400 @enderror form-control block w-full px-4 py-2 text-xl font-normal text-slate-800 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:border-blue-600 focus:outline-none"
                                 placeholder="Username" />
                             @error('username')
                                 <small class="text-red-400">{{ $message }}</small>
@@ -38,7 +38,7 @@
                         <!-- input email -->
                         <div class="mb-6">
                             <input value="{{ old('email') }}" required name="email" type="text"
-                                class="@error('email') border-red-400 @enderror form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                class="@error('email') border-red-400 @enderror form-control block w-full px-4 py-2 text-xl font-normal text-slate-800 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:border-blue-600 focus:outline-none"
                                 placeholder="Email" />
                             @error('email')
                                 <small class="text-red-400">{{ $message }}</small>
@@ -48,7 +48,7 @@
                         <!-- Password input -->
                         <div class="mb-6">
                             <input required name="password" type="password"
-                                class="@error('password') border-red-400 @enderror form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                class="@error('password') border-red-400 @enderror form-control block w-full px-4 py-2 text-xl font-normal text-slate-800 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:border-blue-600 focus:outline-none"
                                 placeholder="Password" />
                             @error('password')
                                 <small class="text-red-400">{{ $message }}</small>

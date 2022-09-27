@@ -23,9 +23,9 @@
 
 
     <div class="block">
-        <h1 class="flex justify-center font-bold text-white text-3xl mt-16">Tampil Data Pegawai</h1>
+        <h1 class="flex justify-center font-bold text-white text-3xl mt-16">Tampil Detail Kepegawaian</h1>
         <div class="flex justify-between mt-5">
-            <form action="/pegawai">
+            <form action="/kepegawaian">
                 <label class="relative block">
                     <span class="sr-only">Search</span>
                     <input class="placeholder:italic placeholder:text-slate-400 block bg-slate-700 w-full border rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm text-slate-300" placeholder="Search pegawai..." type="text" name="search" value="{{ request('search') }}"/>
@@ -38,7 +38,6 @@
             </form>
             <a href="/pegawai/create" class="my-auto text-teal-300 hover:text-teal-500 transition-all">+ Tambah data</a>
         </div>
-
         <table class="mt-2 text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
             <tr class="text-center">
@@ -55,13 +54,10 @@
                     Jenis Kelamin
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    Status
-                </th>
-                <th scope="col" class="py-3 px-6">
                     Gol
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    Agama
+                    Nama Golongan
                 </th>
                 <th scope="col" class="py-3 px-6">
                     Aksi
@@ -84,16 +80,22 @@
                     {{ $p->jenis_kelamin }}
                 </td>
                 <td class="py-4 px-6">
-                    {{ $p->status_nikah }}
-                </td>
-                <td class="py-4 px-6">
                     {{ $p->golongan_id }}
                 </td>
                 <td class="py-4 px-6">
-                    {{ $p->agama }}
+                    @if($p->golongan_id == 'IIa')
+                    Pengatur Muda
+                    @elseif($p->golongan_id == 'IIIa')
+                    Penata Muda
+                    @elseif($p->golongan_id == 'IIIb')
+                    Penata Muda Tingkat 1
+                    @elseif($p->golongan_id == 'IIIc')
+                    Penata
+                    @else
+                    -
+                    @endif
                 </td>
                 <td class="py-4 px-6 flex">
-                    <a href="/pegawai/{{ $p->id }}/edit" class="px-2 font-medium dark:text-orange-300 text-blue-500 hover:underline">Edit</a>
                     <form action="/pegawai/{{ $p->id }}" method="POST">
                         @csrf
                         @method('DELETE')

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Golongan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+
 
 class GolonganController extends Controller
 {
@@ -13,7 +17,18 @@ class GolonganController extends Controller
      */
     public function index()
     {
-        //
+        $golongan = DB::table('golongan');
+        
+        if(request('search')) {
+            $golongan->where('nama_golongan', 'like', '%' . request('search') . '%')
+            ->orWhere('id', 'like', '%' . request('search') . '%');
+        }
+
+        return view('golongan.index', [
+            'title' => 'Golongan',
+            'active' => 'golongan',
+            'golongan' => $golongan->get(),
+        ]);
     }
 
     /**
@@ -23,7 +38,10 @@ class GolonganController extends Controller
      */
     public function create()
     {
-        //
+        return view('golongan.create', [
+            'title' => 'Create Golongan',
+            'active' => 'golongan'
+        ]);
     }
 
     /**
@@ -34,7 +52,14 @@ class GolonganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'id' => 'required|max:11|unique:golongan',
+            'nama_golongan' => 'required|max:100',
+        ]);
+
+        DB::table('golongan')->insert($validatedData);
+
+        return redirect('/golongan')->with('success', 'Data successfully added.');
     }
 
     /**
@@ -45,7 +70,13 @@ class GolonganController extends Controller
      */
     public function show($id)
     {
-        //
+        $golongan = DB::table('golongan')->find($id);
+
+        return view('golongan.detail', [
+            'title' => 'Golongan Detail',
+            'active' => 'golongan',
+            'golongan' => $golongan
+        ]);
     }
 
     /**
@@ -56,7 +87,13 @@ class GolonganController extends Controller
      */
     public function edit($id)
     {
-        //
+        $golongan = DB::table('golongan')->find($id);
+
+        return view('golongan.update', [
+            'title' => 'Edit Golongan',
+            'active' => 'golongan',
+            'golongan' => $golongan,
+        ]);
     }
 
     /**
@@ -66,9 +103,17 @@ class GolonganController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Golongan $golongan)
     {
-        //
+        $rules = [
+            'nama_golongan' => 'required|max:100',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        Golongan::where('id', $request->id)->update($validatedData);
+        
+        return redirect('/golongan')->with('success', 'Golongan updated successfully.');
     }
 
     /**
@@ -79,6 +124,8 @@ class GolonganController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Golongan::destroy($id);
+
+        return redirect('/golongan')->with('success', 'Golongan deleted successfully.');
     }
 }
