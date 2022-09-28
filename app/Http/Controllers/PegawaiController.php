@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Support\Facades\DB;
 
 class PegawaiController extends Controller
@@ -70,8 +72,13 @@ class PegawaiController extends Controller
             'telpon' => 'required|max:12',
             'agama' => 'required|max:15',
             'status_nikah' => 'required',
+            'foto' => 'image|file|max:2048',
             'alamat' => 'required',
         ]);
+
+        if($request->file('image')) {
+            $validatedData['foto'] = $request->file('image')->store('pegawai-image');
+        }
 
         DB::table('pegawai')->insert($validatedData);
 
@@ -134,7 +141,8 @@ class PegawaiController extends Controller
             'agama' => 'required|max:15',
             'status_nikah' => 'required',
             'alamat' => 'required',
-        ];
+            'foto' => 'image|file|max:2048',
+        ];  
 
         if($request->nik != $pegawai->nik) {
             $rules['nik'] = 'required|max:12';
@@ -145,6 +153,13 @@ class PegawaiController extends Controller
         }
 
         $validatedData = $request->validate($rules);
+
+        if($request->file('image')) {
+            if($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['foto'] = $request->file('image')->store('pegawai-image');
+        } 
 
         Pegawai::where('id', $pegawai->id)->update($validatedData);
 
@@ -157,9 +172,13 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pegawai $pegawai)
     {
-        Pegawai::destroy($id);
+        if ($pegawai->foto) {
+            Storage::delete($pegawai->foto);
+        }
+
+        Pegawai::destroy($pegawai->id);
 
         return redirect('/pegawai')->with('success', 'Pegawai deleted successfully.');
     }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('agama', 15);
             $table->enum('status_nikah', ['belum nikah', 'nikah']);
             $table->text('alamat');
+            $table->string('foto');
             $table->timestamps();
         });
     }

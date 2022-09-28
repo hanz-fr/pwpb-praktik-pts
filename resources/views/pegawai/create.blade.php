@@ -3,7 +3,7 @@
 @section('content')
 <div class="mx-auto my-10">
     <div class="block p-6 bg-slate-900 rounded-lg" style="width: 600px">
-    <form action="/pegawai" method="POST">
+    <form action="/pegawai" method="POST" enctype="multipart/form-data">
       @csrf
       @method('POST')
       <div class="form-group mb-6 ">
@@ -232,9 +232,19 @@
           m-0
            focus:border-blue-600 focus:outline-none" id="alamat"
           placeholder=". . .">
-          @error('agama')
+          @error('alamat')
           <small class="text-red-400">{{ $message }}</small>
           @enderror
+      </div>
+
+    <div class="form-group mb-6">
+        <input type="file" class=" tw-w-full tw-text-sm text-slate-500
+          file:tw-mr-4 file:tw-py-2 file:tw-px-4
+          file:tw-rounded-full file:tw-border-0
+          file:tw-text-lg file:tw-text-gray-500 file:hover:tw-text-sims file:tw-cursor-pointer file:tw-font-semibold
+          file:bg-violet-50 file:text-sims
+          hover:file:bg-violet-100" 
+          id="image" name="image"/>
       </div>
 
       <button type="submit" class="

@@ -8,6 +8,19 @@
             </h1>
             <table class="table bg-slate-900 border-separate border-spacing-y-3 border-spacing-x-10">
                 <tbody class="text-white">
+                    @if($pegawai->foto)
+                    <tr>
+                        <div class="flex justify-center">
+                            <img class="rounded-lg" src="{{ asset('storage/'.$pegawai->foto) }}" height="200" width="200" alt="pegawai"> 
+                        </div>
+                    </tr>
+                    @else
+                    <tr>
+                        <div class="flex justify-center">
+                            <img class="rounded-lg" src="{{ asset('storage/image/user.jpg') }}" alt="photo" width="200" height="200">
+                        </div>
+                    </tr>
+                    @endif
                     <tr>
                         <td class="px-5 font-bold text-slate-300">ID</td>
                         <td class="px-5 text-slate-300">{{ $pegawai->id }}</td>

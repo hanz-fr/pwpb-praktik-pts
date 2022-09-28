@@ -23,5 +23,6 @@ class Pegawai extends Model
         'status_nikah',
         'alamat',
         'golongan_id',
+        'foto'
     ];
 }
